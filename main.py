@@ -1,13 +1,11 @@
 import random
-
-
+import datetime as dt
 def verificaPlayersInativos(players):
     playersInativo = 0
     for player in players:
         if players[player]['Status'] == 'Inativo':
             playersInativo += 1
     return playersInativo
-
 
 def calVencedorTimeOut(players):
     valorMax = 0
@@ -28,7 +26,6 @@ def calVencedorTimeOut(players):
         for player in res:
             vencedor = player
     return vencedor
-
 
 def porcentoVitorias(numWinPlayer, resume):
     media = (numWinPlayer / len(resume['Vencedores'])) * 100
@@ -151,7 +148,6 @@ for simulacaoNum in range(300):
         resume['Vencedores'].append(vencedorTimeOut)
 
     resume['Numturns'].append(numRodada)
-
 
 totalTurns = 0
 for turns in resume['Numturns']:
