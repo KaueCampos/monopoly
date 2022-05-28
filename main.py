@@ -1,5 +1,6 @@
 import random
 import datetime as dt
+
 def verificaPlayersInativos(players):
     playersInativo = 0
     for player in players:
@@ -73,9 +74,9 @@ for simulacaoNum in range(300):
             if players[player]['Status'] == 'Inativo':
                 continue
             players[player]['Posicao'] += random.randrange(1, 7)
-            if players[player]['Posicao'] >= 20:
+            if players[player]['Posicao'] >= 20: 
                 players[player]['Saldo'] += 100
-                players[player]['Posicao'] -= 20
+                players[player]['Posicao'] -= 20 
             if infoProp[tab[players[player]['Posicao']]]['Proprietario'] == None:
                 if players[player]['Comportamento'] == 'Impulsivo':
                     if (players[player]['Saldo'] - infoProp[tab[players[player]['Posicao']]]['Venda']) >= 0:
@@ -177,19 +178,22 @@ print('O Comportamento ' + players['Player3']['Comportamento'] + ' Ganhou ' + "{
 print('O Comportamento ' + players['Player4']['Comportamento'] + ' Ganhou ' + "{:.2f}".format(
     porcentoVitorias(numWinsP4, resume)) + r'% das Vezes.')
 
-playerWinMax = max(set
-                   (resume['Vencedores']),
-                   key=resume['Vencedores'].count)
-print('Comportamento com Mais Vitórias: '
-      + str(players[playerWinMax]
-            ['Comportamento']))
-saida = {'ConcTimeOut': int(resume['PartidasConcTimeOut']),
-         'QtdmedianTurn': int(medianTurn),
-         'PorcentoVitoriaComportamento': {
-    players['Player1']['Comportamento']: "{:.2f}".format(porcentoVitorias(numWinsP1, resume)) + r'%',
-    players['Player2']['Comportamento']: "{:.2f}".format(porcentoVitorias(numWinsP2, resume)) + r'%',
-    players['Player3']['Comportamento']: "{:.2f}".format(porcentoVitorias(numWinsP3, resume)) + r'%',
-    players['Player4']['Comportamento']: "{:.2f}".format(porcentoVitorias(numWinsP4, resume)) + r'%'},
-    'Vencedor': playerWinMax}
+def players_winmax():
+    playerWinMax = max(set
+                       (resume['Vencedores']),
+                       key=resume['Vencedores'].count)
+    return playerWinMax
+def return_code(playerWinMax):
+    print('Comportamento com Mais Vitórias: '
+          + str(players[playerWinMax]
+                ['Comportamento']))
+    saida = {'ConcTimeOut': int(resume['PartidasConcTimeOut']),
+             'QtdmedianTurn': int(medianTurn),
+             'PorcentoVitoriaComportamento': {
+        players['Player1']['Comportamento']: "{:.2f}".format(porcentoVitorias(numWinsP1, resume)) + r'%',
+        players['Player2']['Comportamento']: "{:.2f}".format(porcentoVitorias(numWinsP2, resume)) + r'%',
+        players['Player3']['Comportamento']: "{:.2f}".format(porcentoVitorias(numWinsP3, resume)) + r'%',
+        players['Player4']['Comportamento']: "{:.2f}".format(porcentoVitorias(numWinsP4, resume)) + r'%'},
+        'Vencedor': playerWinMax}
+    print(saida)
 
-print(saida)
